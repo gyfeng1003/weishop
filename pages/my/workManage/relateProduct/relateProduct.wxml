@@ -1,0 +1,36 @@
+<import src="/template/productItem/productItem.wxml"/>
+<import src="/template/SearchBar/SearchBar.wxml"/>
+<import src="/template/emptyText/emptyText.wxml"/>
+
+<view class="container">
+  <view style='margin-bottom: 46px;'>
+    <view style='margin: 0 5%;padding: 30rpx 0;'>
+      <template is="SearchBar" 
+      data="{{searchData,placeholder: '商品名称', width: '100%'}}"></template>
+      </view>
+    
+      <!--查询length不为0-->
+      <block wx:for="{{products}}" wx:key="index" 
+      wx:if="{{products.length > 0  && !loadError && !loading}}">
+        <template is="productItem" data="{{item, index, relate:true}}"></template>
+      </block>
+
+      <!--查询length为0-->
+      <block wx:if="{{products.length == 0 && !searchFlag && !loadError && !loading}}">
+        <template is="listEmpty" data="{{text: '没有搜索到相关商品'}}"></template>
+      </block>
+
+      <block wx:if="{{loadError && !loading}}">
+        <template is="loadFail"></template>
+      </block>
+
+      <block wx:if="{{loading}}">
+        <template is="loading"></template>
+      </block>
+  </view>
+  
+  <view class="submit-btn" bindtap='relateSubmit'>
+    <button type='warn'>提交</button>
+  </view>
+</view>
+

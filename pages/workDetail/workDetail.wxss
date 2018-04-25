@@ -1,0 +1,142 @@
+@import '../../wxParse/wxParse.wxss';
+.container{
+  font-size: 32rpx;
+  overflow: hidden;
+}
+.panel{
+  margin-bottom: 20rpx;
+  background: #fdfdfd;
+  padding: 20rpx;
+  line-height: 1.6;
+}
+.jw{
+  display: -webkit-flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.jw view:first-child{
+  border-left: 8rpx solid #ff0000;
+  padding-left: 16rpx;
+  height: 20px;
+  line-height: 20px;
+  margin: 10rpx 0;
+}
+.discuss{
+  display: -webkit-flex;
+  align-items: center;
+  vertical-align: middle;
+  padding: 20rpx 0;
+  font-size: 36rpx;
+}
+.discuss>view>label{
+  font-size: 32rpx;
+}
+.discuss view:last-child{
+  background: #f4f8fb;
+  padding-left: 20rpx;
+  border-radius: 4rpx;
+  width:84%;
+  margin-left:20rpx;
+  display: -webkit-flex;
+  align-items: center;
+}
+.publish-input{
+  font-size: 32rpx;
+}
+
+.discuss-list{
+  display: -webkit-flex;
+  font-size: 36rpx;
+  flex-wrap: wrap;
+}
+.list-item{
+  flex:0 0 100%;
+  display: -webkit-flex;
+  padding-top: 14rpx;
+  font-size: 30rpx;
+}
+.name{
+  color: #666;
+}
+.list-item .discuss-item{
+  display: -webkit-flex;
+  justify-content: space-between;
+  color: #aaa;
+  padding: 10rpx 0;
+}
+.list-item>view{
+  padding-left: 20rpx;
+  width:86%;
+}
+.reply{
+  display: -webkit-flex;
+  font-size: 32rpx;
+}
+.reply>view{
+  padding-right: 20rpx;
+}
+.collect{
+  width: 38rpx;
+  height: 38rpx;
+  margin-right: 0;
+}
+.reply-detail{
+  background: #f4f8fb;
+}
+.reply-detail label{
+  padding-left: 30rpx;
+  color: #666;
+  font-size: 32rpx;
+  border-radius: 4rpx;
+}
+.go{
+  vertical-align: middle;
+}
+
+.share{
+  text-align: center;
+  border-left: 1rpx solid #ccc;
+  width:50px;
+  position: relative;
+}
+.share button{
+  position:absolute;
+  width:70px;
+  height:50px;
+  top:0;
+  left:0;
+  z-index:2;
+  opacity:0;
+}
+.share view:last-child{
+  font-size: 24rpx;
+  color: #888;
+}
+
+.box{
+  display: -webkit-flex;
+  justify-content: space-between;
+}
+
+.home{
+  width: 100rpx;
+  height: 100rpx;
+  position: fixed;
+  bottom: 100rpx;
+  left: 30rpx;
+  text-align: center;
+  background: #666;
+  border-radius: 50%;
+}
+.home image{
+  width: 60rpx;
+  height: 60rpx;
+}
+.home view{
+  font-size: 24rpx;
+  color: #fff;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

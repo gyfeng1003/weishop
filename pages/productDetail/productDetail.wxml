@@ -1,0 +1,152 @@
+<import src="/template/Line/Line"/>
+<import src="/wxParse/wxParse.wxml" />
+<view class="container">
+  <view style='margin-bottom: 46px;'>
+    <view class="swiper-container">
+        <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" 
+        duration="{{duration}}" bindchange="swiperchange">
+            <block wx:for="{{goods.imgList}}" wx:key="index">
+                <swiper-item>
+                    <image src="{{item.imageUrl}}" class="slide-image" width="355"
+                     height="150" mode="aspectFit" lazy-load="true"/>
+                </swiper-item>
+            </block>
+        </swiper>
+        <view class="dots">  
+            <block wx:for="{{goods.imgList}}" wx:key="index">  
+                <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
+            </block>
+        </view>
+    </view>
+    <view class="title label-title">
+      {{goods.name}}
+    </view>
+    <view class="title">
+      <view class="price">
+        <label>
+          <text style="font-size: 24rpx;">￥</text>
+            <text>{{goods.goodsCost}}</text>
+          </label>
+        <label>
+          <text style="font-size: 24rpx;">￥</text>
+            <text>{{goods.goodsPrice}}</text>
+        </label>
+      </view>
+    </view>
+    <view class="title navigate" bindtap='chooseSezi'>
+      <view>
+      <text>选择：{{propertyChildNames}}</text>
+      <!-- <text>{{selectSize}}</text> -->
+      <!-- <label></label>  -->
+      </view>
+      <view><image class="collect" 
+      src='http://image.235shanghai.com/fashionMiniPrograms-go.png'></image></view>
+    </view>
+    <template is="lineView"></template>
+    <view class="title">
+     {{goods.goodsDesc}}
+    </view>
+    <view class="rule">
+      <view>本商品单件包邮</view>
+      <view>
+        <text>一贵就赔</text><text>七天保价</text>
+      </view>
+      <view>
+        <text>品牌店发货</text><text>单件包邮</text>
+      </view>
+      <view>
+        <text>包税</text><text>不支持退货</text>
+      </view>
+    </view>
+    <view class="label-title" style='margin-top: 10px;'>
+      图文详情
+    </view>
+    <view class="imgs">
+       <!-- <block wx:for="{{goods.imgList}}" wx:for-item="item" 
+      wx:key="Math.random().toString(32)">
+        <view><image src="{{item.imageUrl}}"></image></view>
+      </block> -->
+       <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+
+    <view class="goods-des-info" style="margin-top:35rpx;" wx:if="{{goods.ciList.length>0}}">
+      <view class="label-title" style="border-bottom:1px solid #eee;">大家评价
+      <text style="color:red">（{{goods.ciList.length}}）</text></view>
+        <view class="imgs" style="margin-top:15rpx;overflow:auto" 
+        wx:for="{{ciList}}" wx:key="index">
+          <view style="width:100rpx;float:left;">
+            <image style="width: 100rpx; height: 100rpx;" mode="aspectFit"
+             src="{{item.userCode}}"></image>
+            <view style="text-align:center;width:100rpx;">
+            {{item.goods.goodReputationStr}}</view>
+          </view>
+          <view 
+          style="width:550rpx;float:left;margin-left:35rpx;border-bottom:1px solid #eee;">
+            <view>{{item.content}}</view>
+            <view style="color: #B0B0B0;font-size:24rpx;">
+            2018-01-22 07:56:04
+            {{item.timeStamp}}  {{item.property}}</view>
+          </view>
+      </view>
+    </view>
+
+    <view class="show-popup" hidden="{{hideShopPopup}}" >
+        <view class="popup-mask" bindtap="closePopupTap"></view>
+        <view class="popup-contents">
+             <view class="pop-goods-info">
+                <view class="pop-img-box">
+                    <image src="{{goods.picture}}" class="goods-thumbnail"/>
+                </view>
+                <view class="pop-goods-des">
+                    <view class="pop-goods-title">{{goods.name}}</view>
+                    <view class="pop-goods-price">¥ {{goods.goodsCost}}</view>
+                </view>
+                <view class="pop-goods-close" bindtap="closePopupTap"></view>
+             </view>
+             <view class="size-label-box">
+               <block wx:for="{{goods.properties}}" 
+               wx:for-index="idx"
+               wx:for-item="property" wx:key="Math.random().toString(32)">
+                <view class="label">{{property.name}}</view> 
+                <view class="label-item-box">
+                  <view class="label-item {{item.active ? 'active' : '' }}"
+                    wx:for="{{property.childsCurGoods}}" wx:key="index"
+                    bindtap="labelItemTap"
+                    data-propertyindex="{{idx}}" 
+                    data-propertyname="{{property.name}}" 
+                    data-propertychildindex="{{index}}"
+                    data-propertychildname="{{item.name}}">
+                      {{item.name}}
+                  </view>
+                </view>
+              </block>
+             </view> 
+              <!--  
+                data-propertyid="{{property.id}}" 
+                data-propertychildid="{{item.id}}"
+              <view class="buy-num-box">
+               <view class="num-label">购买数量</view>
+                <view class="num-box">
+                    <view class="num-jian {{buyNumber == buyNumMin ? 'hui': ''}}" bindtap="numJianTap">-</view>
+                    <view class="num-input">
+                       <input  type="number" value="{{buyNumber}}" disabled/>
+                    </view>
+                    <view class="num-jia {{buyNumber== buyNumMax ? 'hui': ''}}" bindtap="numJiaTap">+</view>
+                </view> 
+              </view>  
+             <!-- <view class="popup-join-btn" wx:if="{{shopType =='addShopCar'}}" bindtap="addShopCar">
+                加入购物车
+             </view> -->
+             <view class="popup-join-btn" wx:if="{{shopType =='tobuy'}}" bindtap="onToConfirmOrder">
+                立即购买
+             </view>                      
+        </view>
+    </view>
+  </view>
+  <view class="product" bindtap='buyNow'>
+    <button type="warn">立即购买</button>
+  </view>
+ 
+</view>
+
+

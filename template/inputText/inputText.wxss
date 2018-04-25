@@ -1,0 +1,21 @@
+.input{
+  background: #fff;
+  padding-left: 30rpx;
+}
+.input .section{
+  display: -webkit-flex;
+  padding: 20rpx 0;
+  font-size: 32rpx;
+  align-items: center;
+  width: 100%;
+}
+.section label{
+  flex: 0 0 25%;
+  color: #666;
+}
+.section input{
+  flex: 0 0 75%;
+}
+textarea{
+  height:50px;
+}

@@ -1,0 +1,92 @@
+@import '/pages/my/workManage/addOrEditWork/addOrEditWork.wxss';
+
+.color-title{
+  padding-top: 20rpx;
+  padding-bottom: 16rpx;
+  color: #666;
+}
+.box{
+  margin: 0 6px;
+}
+.color{
+  margin: 0 6px;
+}
+.color-box,.custom-color-box{
+  display: -webkit-flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-bottom: 20rpx;
+}
+.color-box-item, .custom-color-item{
+  flex: 0 0 30%;
+  text-align: center;
+  padding: 16rpx 0;
+  border: 1px solid #eee;
+  margin-top: 20rpx;
+  border-radius: 16rpx;
+  color: #999;
+  font-size: 28rpx;
+  box-sizing: border-box;
+}
+.custom-color-box{
+  justify-content: flex-start;
+  align-items: center;
+}
+.custom-color-item{
+  border: none;
+  background: #f0eff5;
+  padding: 12rpx 0;
+}
+.active{
+  background: #333;
+  color: #fff;
+}
+.star{
+  color: #CE3C39;
+}
+.star+text{
+  padding-left: 16rpx;
+  font-size: 28rpx;
+}
+.result-title{
+  display: -webkit-flex;
+  justify-content: space-between;
+  padding: 20rpx 0;
+  font-size: 28rpx;
+  color: #666;
+}
+
+.text text{
+  padding: 0 20rpx;
+}
+.result-body{
+  padding: 10rpx 0;
+}
+.result-body,.row-color{
+  display: -webkit-flex;
+  align-items: center;
+  font-size: 26rpx;
+}
+.row-color view:first-child{
+  color: #999;
+}
+.result-item{
+  font-size: 32rpx;
+  border-right: 1px solid #f2f2f2;
+  flex: 0 0 80%;
+}
+.row{
+  display: -webkit-flex;
+  padding: 10rpx;
+}
+.delete{
+  flex: 0 0 20%;
+  text-align: center;
+}
+.delete image{
+  width: 54rpx;
+  height: 54rpx;
+}
+.row view:first-child{
+  flex: 0 0 40%;
+}

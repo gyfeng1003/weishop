@@ -1,0 +1,108 @@
+<import src="/template/Line/Line.wxml"/>
+<import src="/template/productItem/productItem.wxml"/>
+<import src="/template/ShowToast/showToast.wxml" />
+
+<template is="showToast" data="{{showToast: showToast}}" />
+
+<view class="container">
+  <form bindsubmit='bindSaveWork'>
+    <view>
+        <view style='padding: 10rpx 0;'>
+          <label class="pic">作品图片(至少上传1张图片)</label>
+        </view>
+        <view class="box">
+          <view class="pic-box" style="flex-wrap: nowrap;">
+            <view class="pic-max-item clear-pic-box border-r border-b"
+              bindtap="selectImage"
+              data-sort="0"
+              style="width: {{clientWidth*2/3+'px'}};height: {{clientWidth*2/3+'px'}}">
+              <image class="collect" hidden='{{imgSrc[0].isShow}}' 
+              src='/images/add-gray.png'></image>
+              <image style='width:100%;height:100%;' hidden='{{!imgSrc[0].isShow}}' 
+              src='{{imgSrc[0].imageUrl}}'></image>
+              <image wx:if="{{imgSrc[0].isShow}}"
+                catchtap='clearPic'
+                data-index="{{0}}"
+                class="clear-pic" src="/images/icon_clear.png"></image>  
+            </view>
+            <view>
+              <block wx:for="{{2}}" wx:for-index="index" wx:key="index">
+                <view class="pic-min-item border-b clear-pic-box"
+                  bindtap="selectImage"
+                  data-sort="{{index+1}}"
+                  style="width: {{clientWidth/3+'px'}};height: {{clientWidth/3+'px'}}">
+                  <image class="collect" hidden='{{imgSrc[index+1].isShow}}'
+                  src='/images/add-gray.png'></image>
+                  <image style='width:100%;height:100%;' 
+                    hidden='{{!imgSrc[index+1].isShow}}' 
+                    src='{{imgSrc[index+1].imageUrl}}'></image>
+                  <image wx:if="{{imgSrc[index+1].isShow}}" 
+                    catchtap='clearPic'
+                    data-index="{{index+1}}"
+                    class="clear-pic" src="/images/icon_clear.png"></image>      
+                </view>
+              </block>
+            </view>
+          </view>
+          <view class="pic-box">
+            <block wx:for="{{6}}" wx:for-index="index" wx:key="index">
+              <view
+                bindtap="selectImage"
+                data-sort="{{index+3}}"
+                class="pic-box-item clear-pic-box border-b {{(index==2||index==5)?'': 'border-r'}}"
+                style="width:{{clientWidth/3+'px'}}; height: {{clientWidth/3+'px'}}">
+                <image class="collect" 
+                  hidden='{{imgSrc[index+3].isShow}}' src='/images/add-gray.png'></image>
+                <image style='width:100%;height:100%;' hidden='{{!imgSrc[index+3].isShow}}' 
+                    src='{{imgSrc[index+3].imageUrl}}'></image>
+                <image wx-if="{{imgSrc[index+3].isShow}}" 
+                  catchtap='clearPic'
+                  data-index="{{index+3}}"
+                  class="clear-pic" src="/images/icon_clear.png"></image>         
+              </view>
+            </block>
+          </view>
+        </view>
+
+        <view class="row-box">
+          <view class="row-label">作品标题</view>
+          <view class="right-text">
+              <input name="title" type="text" value="{{work.title}}"
+              class="liuyan" placeholder="作品标题" />
+          </view>
+        </view>
+        <template is="lineView"></template>
+        <view class="row-box">
+          <view class="row-label">作品描述</view>
+          <view class="right-text">
+              <textarea name="content" type="text" value="{{work.content}}"
+              bindblur="bind"
+              maxlength="5000"
+              auto-height="true"
+              class="liuyan" placeholder="作品描述" />
+          </view>
+        </view>
+        <template is="lineView"></template>
+        <view style="height:20rpx;background: #eee;"></view>
+        <block wx:for="{{relatedProduct}}" wx:key="index">
+          <template is="productItem" 
+          data="{{item, relate:false, editWork:true, index}}"></template>
+        </block>
+
+        <template is="lineView"></template>
+        <view class="product" bindtap='onRelateProduct'>
+          <image class="collect add" 
+          src='http://image.235shanghai.com/fashionMiniPrograms-add.png'></image>
+          <view>关联商品</view>
+          <image class="collect" 
+          style='width:46rpx;height:36rpx;margin-right:0;' 
+          src='http://image.235shanghai.com/fashionMiniPrograms-go.png'></image>
+        </view>
+        <view style="height:20rpx;background: #eee;"></view>
+    </view>
+ 
+    <view class="submit-btn" style='position: relative;'>
+       <button type='warn' form-type='submit'>提交</button> 
+    </view>
+  </form>
+</view>

@@ -1,0 +1,50 @@
+/**index.wxss**/
+@import "../../template/SearchBar/SearchBar.wxss";
+@import "../../template/recordList/recordList.wxss";
+.search_view {
+  width: 100%;
+  height: 110rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position:fixed;
+  z-index:999;
+  background-color: #f9f9f9;
+}
+.ui-search {
+  border-top: 1px solid #000;
+}
+
+.search-fixed-top {
+  margin-top:110rpx;
+  width:100%;
+}
+
+
+/*首页底菜单*/
+.cb-main-tabs {
+	position: fixed;
+	bottom:0;
+	width:100%;
+	left: 0;
+	background: #fff;
+	height: 90rpx;
+	box-sizing: border-box;
+	z-index: 9;
+  padding-top: 10rpx;
+}
+.cb-main-tabs view{
+	width: 50%;
+	float: left;
+	text-align: center;
+	color: #666;
+	font-size: 20rpx;
+}
+.tabs-img{
+  width: 50rpx;
+  height: 50rpx;
+}
+.cb-main-tabs view text{
+	display: block;
+	clear: both;
+}

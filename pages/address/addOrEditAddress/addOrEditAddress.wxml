@@ -1,0 +1,67 @@
+<import src="/template/ShowToast/showToast.wxml"/>
+
+<template is="showToast" data="{{showToast}}"></template>
+
+<view class="container">
+  <view class="addrAdd">
+    <form bindsubmit="onSaveAddrInfo">
+      <view class="input">
+         <view class="section"> 
+          <label>收件人</label>
+          <input placeholder="请输入收件人的真实姓名"
+            value="{{addrForm.name}}"
+            name="name"
+            placeholder-class='placeholder'/>
+         </view> 
+        <view style="width:100%; background: #f1f1f1; height:1px;"></view>
+      </view>
+
+      <view class="input">
+        <view class="section">
+          <label>手机号码</label>
+          <input placeholder="请输入11位手机号码"
+            maxlength="11"
+            type="number" 
+            name="mobile"
+            value="{{addrForm.mobile}}"
+            placeholder-class='placeholder'/>
+        </view>
+        <view style="width:100%; background: #f1f1f1; height:1px;"></view>
+      </view>
+
+      <view class="input">
+        <view class="section">
+          <label>选择地区</label>
+          <picker mode="region" bindchange="bindRegionChange" 
+          name="region"
+          value="{{region}}" >
+            <view class="picker">
+              <block wx:if="{{region.length == 0}}">
+                <text style="color: #aaa;">请选择所在地区</text>
+              </block>
+              <block wx:else>
+                {{region[0]}} {{region[1]}} {{region[2]}}
+              </block>
+            </view>
+          </picker>
+        </view>
+        <view style="width:100%; background: #f1f1f1; height:1px;"></view>
+      </view>
+
+      <view class="input">
+        <view class="section">
+          <label>详细地址</label>
+          <textarea 
+          name="content"
+          value="{{addrForm.content}}"
+          placeholder="请输入收件人的详细地址" placeholder-class='placeholder'/>
+        </view>
+        <view style="width:100%; background: #f1f1f1; height:1px;"></view>
+      </view>
+
+      <button class="save-button" type="primary" formType="submit">
+        保存收货信息
+      </button>
+    </form>
+  </view>
+</view>

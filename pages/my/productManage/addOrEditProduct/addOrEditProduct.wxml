@@ -1,0 +1,229 @@
+<import src="/template/Line/Line.wxml"/>
+<import src="/template/ShowToast/showToast.wxml"/>
+
+<template is="showToast" data="{{showToast}}"></template>
+
+<view class="container">
+  <form bindsubmit='bindSaveProduct'>
+    <view style='padding: 6px;'>
+      <label style="font-size: 28rpx;color:#000;">商品图片(至少上传1张图片)</label>
+    </view>
+    <view class="box">
+      <view class="pic-box" style="flex-wrap: nowrap;">
+        <view class="pic-max-item clear-pic-box border-r border-b"
+          bindtap="selectImage"
+          data-sort="0"
+          style="width: {{clientWidth*2/3+'px'}};height: {{clientWidth*2/3+'px'}}">
+          <image class="collect" hidden='{{imgSrc[0].isShow}}' 
+            src='/images/add-gray.png'></image>
+          <image style='width:100%;height:100%;' hidden='{{!imgSrc[0].isShow}}' 
+            src='{{imgSrc[0].imageUrl}}'></image>
+          <image wx:if="{{imgSrc[0].isShow}}"
+            catchtap='clearPic'
+            data-index="{{0}}"
+            class="clear-pic" src="/images/icon_clear.png"></image>  
+        </view>
+        <view
+        style="width: {{clientWidth/3+'px'}};height: {{clientWidth/3+'px'}}">
+          <block wx:for="{{2}}" wx:for-index="index" wx:key="index">
+            <view class="pic-min-item border-b clear-pic-box"
+              bindtap="selectImage"
+              data-sort="{{index+1}}"
+              style="width: {{clientWidth/3+'px'}};height: {{clientWidth/3+'px'}}">
+                <image class="collect" hidden='{{imgSrc[index+1].isShow}}'
+                src='/images/add-gray.png'></image>
+                <image style='width:100%;height:100%;' hidden='{{!imgSrc[index+1].isShow}}' 
+                  src='{{imgSrc[index+1].imageUrl}}'></image>
+                <image wx:if="{{imgSrc[index+1].isShow}}" 
+                  catchtap='clearPic'
+                  data-index="{{index+1}}"
+                  class="clear-pic" src="/images/icon_clear.png"></image>    
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class="pic-box">
+        <block wx:for="{{6}}" wx:for-index="index" wx:key="index">
+          <view class="pic-box-item clear-pic-box border-b {{(index==2||index==5)?'': 'border-r'}}"
+            bindtap="selectImage"
+            data-sort="{{index+3}}"
+            style="width:{{clientWidth/3+'px'}}; height: {{clientWidth/3+'px'}}">
+              <image class="collect" 
+                hidden='{{imgSrc[index+3].isShow}}' src='/images/add-gray.png'></image>
+              <image style='width:100%;height:100%;' hidden='{{!imgSrc[index+3].isShow}}' 
+                  src='{{imgSrc[index+3].imageUrl}}'></image>
+              <image wx-if="{{imgSrc[index+3].isShow}}" 
+                catchtap='clearPic'
+                data-index="{{index+3}}"
+                class="clear-pic" src="/images/icon_clear.png"></image>      
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view class="row-box">
+      <view class="row-label">商品名称</view>
+      <view class="right-text">
+          <input name="name" type="text" value="{{goods.name}}"
+          class="liuyan" placeholder="商品名称" />
+      </view>
+    </view>
+    <view class="row-box">
+      <view class="row-label">商品品牌</view>
+      <view class="right-text">
+          <input name="brand" type="text" value="{{goods.brand}}"
+          class="liuyan" placeholder="商品品牌" />
+      </view>
+    </view>
+    <view class="row-box">
+      <view class="row-label">现价</view>
+      <view class="right-text">
+          <input name="goodsCost" type="text" value="{{goods.goodsCost}}"
+          class="liuyan" placeholder="现价" />
+      </view>
+    </view>
+    <view class="row-box">
+      <view class="row-label">原价</view>
+      <view class="right-text">
+          <input name="goodsPrice" type="text" value="{{goods.goodsPrice}}"
+          class="liuyan" placeholder="原价" />
+      </view>
+    </view>
+    <view class="row-box">
+      <view class="row-label">商品描述</view>
+      <view class="right-text">
+          <textarea name="goodsDesc" type="text" value="{{goods.goodsDesc}}"
+            maxlength="5000"
+            auto-height="true"
+          class="liuyan" placeholder="商品描述"></textarea>
+      </view>
+    </view>
+    <template is="lineView"></template>
+
+    <!--颜色-->
+    <view class="color">
+      <view class="color-title"><text class="star">*</text><text>颜色</text></view>
+
+      <view class="custom-color-box">
+        <view wx:for="{{tempColorArr}}" wx:key="index"
+          class="color-box-item {{item.selected?'active':''}}" 
+          style="margin-right: {{(index+1)%3==0?0:'5%'}}"
+          bindtap='onToggleItem' 
+          data-index="{{index}}" data-key="customcolor">
+          {{item.name}}
+        </view> 
+        <view class="custom-color-item">
+          <input placeholder='自定义颜色' value="{{customColor}}"  
+          data-key="color" bindconfirm="onConfirm"/>
+        </view>
+      </view>
+      <view class="color-box">
+        <block wx:for="{{defaultColors}}" wx:key="index">
+          <view class="color-box-item {{item.selected?'active':''}}"
+          style="margin-right: {{(index+1)%3==0?0:'5%'}}"
+          bindtap='onToggleItem' 
+          data-index="{{index}}" data-key="color">
+            {{item.name}}
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <!--尺码-->
+    <view class="color">
+      <view class="color-title"><text class="star">*</text><text>尺码</text></view>
+      <view class="custom-color-box">
+        <view wx:for="{{tempSizeArr}}" wx:key="index"
+          class="color-box-item {{item.selected?'active':''}}" 
+          style="margin-right: {{(index+1)%3==0?0:'5%'}}"
+          bindtap='onToggleItem' 
+          data-index="{{index}}" data-key="customsize">
+          {{item.name}}
+        </view> 
+        <view class="custom-color-item">
+          <input placeholder='自定义尺码' value="{{customSize}}" 
+          data-key="size" bindconfirm="onConfirm"/>
+        </view>
+      </view>
+      <view class="color-box">
+        <block wx:for="{{defaultSizes}}" wx:key="index">
+          <view class="color-box-item {{item.selected?'active':''}}"
+          style="margin-right: {{(index+1)%3==0?0:'5%'}}"
+          bindtap='onToggleItem' 
+          data-index="{{index}}" data-key="size">
+            {{item.name}}
+          </view>
+        </block>
+      </view>
+    </view>
+
+    <view style="height:20rpx;background: #eee;margin:0 -8px;"></view>
+
+    <!--商品规格-->
+    <view class="color">
+      <view class="result-title">
+        <view>商品规格</view>
+        <view class="text">
+          <!-- <text>设置统一数量</text><text>设置统一价格</text> -->
+        </view>
+      </view>
+      <template is="lineView"/>
+      <block wx:for="{{productSpec}}" wx:key="index">
+        <view class="result-body">
+          <view class="result-item">
+            <!-- <view class="row">
+              <view class="row-color">
+                <view>售价</view>
+                <view> 
+                <input placeholder='必填' name="goodsPrice1" bindblur='bindInput'
+                value="{{item.goodsPrice}}" data-index="{{index}}" data-type="shoujia"/>
+                </view>
+              </view>
+            </view> -->
+            <view class="row">
+              <view class="row-color">
+                <view>颜色</view>
+                <view>{{item.color}}</view>
+              </view>
+              <view class="row-color">
+                <view>采购数量</view>
+                <view>
+                  <input placeholder='必填' name="inventory1" bindblur='bindInput'
+                  value="{{item.inventory}}" data-index="{{index}}" data-type="num"/>
+                </view>
+              </view>
+            </view>
+            <view class="row">
+              <view class="row-color">
+                <view>尺码</view>
+                <text>{{item.size}}</text>
+              </view>
+              <view class="row-color">
+              </view>
+            </view>
+          </view>
+          <view class="delete" bindtap='delProductSpec' data-index="{{index}}">
+            <image src='http://image.235shanghai.com/fashionMiniPrograms-delete.png'></image>
+          </view>
+        </view>
+        <template is="lineView"/>
+      </block>
+    </view>
+    <view style="height:20rpx;background: #eee;margin:0 -8px;"></view>
+    
+    <!-- <view class="input">
+      <label>商品描述</label>
+      <textarea placeholder="商品描述"></textarea>
+    </view>
+    <template is="lineView"></template>
+    <view class="input" style='align-items: center;'>
+      <label>交易备注</label>
+      <input placeholder="交易备注"/>
+    </view> -->
+    <view style="height:6rpx;background: #eee;margin:0 -8px;"></view>
+
+    <view class="submit-btn" style='position:relative;'>
+      <button type='warn' form-type='submit'>提交</button>
+    </view>
+  </form>
+</view>

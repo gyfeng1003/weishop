@@ -1,0 +1,118 @@
+/* pages/confirmOrder.wxss */
+@import "/template/inputText/inputText.wxss"
+.save-button{
+  margin: 32rpx;
+  font-size: 34rpx;
+}
+.addrAdd{
+  margin-top: 30rpx;
+}
+.container{
+  margin-bottom: 46px;
+}
+.defaultAddr{
+  width: 100%;
+  background-color: #fff;
+  margin-bottom: 26rpx;
+}
+.addr-box{
+  display: -webkit-flex;
+  align-items: center;
+  padding: 30rpx;
+}
+.collect{
+  padding-right: 20rpx;
+}
+.content{
+  font-size: 28rpx;
+  flex: 0 0 84%;
+}
+
+.product-basic,.fee-info{
+  background: #fdfdfd;
+}
+.product-basic .name{
+  padding: 20rpx 30rpx;
+  font-size: 28rpx;
+}
+.basic-info{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 30rpx;
+  padding: 24rpx;
+  border-bottom: 1px solid #eee;
+}
+.pop-goods-des{
+  padding-left: 30rpx;
+}
+.pop-goods-title{
+  font-size: 28rpx;
+}
+.pop-goods-title,.pop-goods-price{
+  padding: 20rpx 0;
+}
+.fee-info{
+  margin: 26rpx 0 240rpx 0;
+}
+.fee-info .list-item{
+  display: -webkit-flex;
+  justify-content: space-between;
+  padding: 16rpx 30rpx;
+  font-size: 28rpx;
+}
+.text{
+  padding-left: 30rpx;
+  font-size: 34rpx;
+}
+
+.form-box{
+    width:100%;
+    background-color: #fff;
+    margin-top: 20rpx;
+}
+.row-wrap{
+    width: 720rpx;
+    height: 88rpx;
+    line-height: 88rpx;
+    margin-left: 30rpx;
+    border-bottom: 1rpx solid #eee;
+    display: flex;
+    font-size: 34rpx;
+    /*justify-content: space-between;*/
+}
+.row-wrap .label{
+    width: 160rpx;
+    color: #666;
+}
+.row-wrap .label-right{
+    flex: 1;
+    height: 88rpx;
+    line-height: 88rpx;
+}
+.row-wrap .label-right input{
+    height: 100%;
+    font-size: 34rpx;
+    padding-right: 30rpx;
+}
+.row-wrap .right-box{
+    margin-right: 30rpx; 
+}
+.placeholer{
+  color: #aaa;
+}
+
+.product{
+  display: -webkit-flex;
+  align-items: center;
+  background: #fdfdfd;
+}
+.product view{
+  flex: 0 0 65%;
+}
+button{
+  flex: 0 0 35%;
+}
+.placeholder{
+  color: #aaa;
+}

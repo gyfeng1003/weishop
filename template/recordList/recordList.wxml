@@ -1,0 +1,37 @@
+  <import src="/template/Line/Line.wxml"/>
+
+  <!--列表模板-->
+  <template name="recordList">
+    <view class="list-item" id="{{index}}">
+        <image mode='aspectFill' src="{{friend.avatar}}"></image>
+        <view class="inline" bindtap='find'>
+          <view class="name">{{friend.nickName}}</view>
+          <view class="work">{{friend.work}}</view>
+        </view>
+       
+       <!--0未关注 1关注-->
+        <view class="followBtn" id="{{index}}" wx:if="{{page=='search'}}">
+          <block wx:if="{{friend.isFollow == '0'}}">
+            <button type="default" catchtap='follow' data-type="follow" 
+            data-info="{{friend.userCode}}">关注</button>
+          </block>
+          <block wx:else>
+            <button type="default" catchtap='follow' data-type="cancelFollow"
+            data-info="{{friend.userCode}}">取消关注</button>
+          </block>
+        </view>
+        <view class="followBtn" id="{{index}}" wx:if="{{page=='order'}}">
+          <block>
+            <button type="default" catchtap='toOrder' 
+            data-user="{{friend.userCode}}">订单</button>
+          </block>
+        </view>
+        <view class="followBtn" id="{{index}}" wx:if="{{page=='setting'}}">
+          <block>
+            <button type="default" catchtap='setToEmployee'>设置合伙人</button>
+          </block>
+        </view>
+      </view>
+      <template is="lineView"></template>
+  </template>
+  

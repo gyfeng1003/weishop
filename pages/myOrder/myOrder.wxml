@@ -1,0 +1,91 @@
+<import src="/template/Line/Line.wxml"/>
+<import src="/template/emptyText/emptyText.wxml"/>
+
+<view class="container">
+  <view class="orderList">
+    <view class="orderList-item" wx:for="{{orderList}}" wx:key="{{index}}">
+      <view class="orderList-item-header">
+        <view><text>下单时间：</text><text>{{item.timeStamp}}</text></view>
+        <view wx:if="{{roleType!='0'}}">
+          <picker bindchange="bindPickerChange" data-index="{{index}}"
+            value="{{item.type}}" range="{{orderState}}">
+            <view class="picker">
+              {{orderState[item.type]}}
+            </view>
+          </picker>
+        </view>
+        <view wx:else>
+          <block wx:if="{{item.type==0}}">
+            <view>待付款</view>
+          </block>
+          <block wx:if="{{item.type==1}}">
+            <view>待发货</view>
+          </block>  
+          <block wx:if="{{item.type==2}}">
+            <view>已发货待收货</view>
+          </block>
+          <block wx:if="{{item.type==3}}">
+            <view>已完成</view>
+          </block>
+          <block wx:if="{{item.type==4}}">
+            <view>退款中</view>
+          </block>
+          <block wx:if="{{item.type==5}}">
+            <view>订单已取消</view>
+          </block> 
+        </view>
+      </view>
+      <view class="orderList-item-header">
+        <view><text>订单编号：</text><text>{{item.orderCode}}</text></view>
+        <view></view>
+      </view>
+      <template is="lineView"></template>
+      <view class="orderList-item-body">
+        <image class="goods-thumbnail" src='{{item.goodsPicture}}'></image>
+        <view class="goods-des">
+          <view class="goods-title">{{item.goodsName}}</view>
+          <view class="goods-price">¥ {{item.goodsPrice}}</view>
+        </view>
+      </view>
+      <template is="lineView"></template>
+      <view class="orderList-item-footer">
+        <view class="price">
+          <text>待付：</text><text class="label-text">￥{{item.payMoney}}</text>
+        </view>
+        <view style='display:-webkit-flex;'>
+          <block wx:if="{{item.type==0}}">
+            <view class="status" data-index="{{index}}" bindtap='cancelOrder'>
+              <text>取消订单</text>
+            </view>
+          </block>
+          <block wx:if="{{item.type!=0 && !finish}}">
+            <view class="status" data-index="{{index}}" bindtap='onComment'>
+              <text>评价</text>
+            </view>
+          </block>
+        </view>
+      </view>
+      <view class="comment" wx:if="{{item.showComment}}">
+        <textarea placeholder='请输入您的评价' bindinput='bindInput'>
+        </textarea>
+        <view>
+          <button bindtap='onPublish' data-id="{{item.goodsId}}"
+          class='publish-btn'>发表</button>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <block wx:if="{{loadError && !loading}}">
+    <template is="loadFail"></template>
+  </block>
+
+  <block wx:if="{{loading}}">
+    <template is="loading"></template>
+  </block>
+
+  <block wx:if="{{orderList.length==0 && !loadError && !loading}}">
+    <template is="emptyText"  
+    data="{{tip: '暂无订单信息', top: '66px'}}"></template>
+  </block>
+</view>

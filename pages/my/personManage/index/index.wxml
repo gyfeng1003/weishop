@@ -1,0 +1,29 @@
+<import src="/template/SearchBar/SearchBar.wxml"/>
+<import src="/template/recordList/recordList.wxml"/>
+<import src="/template/emptyText/emptyText.wxml"/>
+
+<view class="container">
+  <!--搜索框-->
+  <view class="search_view ui-search">
+    <block wx:if="{{roleType!='1'}}">
+      <template is="SearchBar" 
+        data="{{searchData,width:'90%',placeholder:'请输入手机号关注好友'}}" />
+    </block>
+    <block wx:else>
+     <template is="SearchBar" 
+        data="{{searchData,width:'82%',placeholder:'昵称、手机号', all:true}}" />
+    </block>
+  </view>
+  <view class="search-fixed-top">
+    <block wx:for="{{employList}}" wx:key="index">
+      <template is="recordList" data="{{friend: item, page: 'order'}}"></template>
+    </block>
+
+    <block wx:if="{{employList.length == 0 && !searchFlag}}">
+      <template is="listEmpty" data="{{text:'没有搜索到相关好友'}}">
+      </template>
+    </block>
+
+
+  </view>
+</view>

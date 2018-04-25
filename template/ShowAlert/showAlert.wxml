@@ -1,0 +1,16 @@
+<template name="showAlert">  
+  <block wx:if="{{showAlert.isShow? showAlert.isShow: false}}">  
+    <view class="toast-bg"></view>  
+    <view class="toast-center">  
+      <view class="toast-alert">  
+      	<view class="toast-alert-title">
+      		<view>{{showAlert.title}}</view>
+      	</view>
+      	<view class="toast-alert-button">
+	        <view bindtap="cancel">取消</view> 
+	        <view class="sub" bindtap="submit" data-obj="{{showAlert.obj}}">确认</view> 
+      	</view>
+      </view>
+    </view>
+  </block> 
+</template> 

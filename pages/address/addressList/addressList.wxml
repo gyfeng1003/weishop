@@ -1,0 +1,65 @@
+<import src="/template/emptyText/emptyText.wxml"/>
+
+<view class="container">
+  <view class="addrList">
+    <view class="a-gooods">
+      <view class="a-goods-conts" 
+        wx:for="{{addrList}}" wx:key="{{Math.random().toString(32)}}"
+        wx:if="{{addrList.length>0 && !loadError}}"
+        data-index="{{index}}"  bindtouchstart="touchS" 
+        bindtouchmove="touchM" bindtouchend="touchE"
+        style="{{item.left}}">
+      <view class="addr-item" bindtap='selectAddr' data-item="{{item}}">
+        <view class="edit" data-consignee="{{item}}"   catchtap='onToEdit'>
+          <view style='margin:0 auto;width:36rpx;height:36rpx;'>
+            <image style='width:100%;height:100%;' src='/images/edit.png'></image>
+          </view>
+          <text>编辑</text>
+        </view>
+        <view class="middle">
+          <view class="basic-info">
+            <text>{{item.name}}</text>
+            <text style="padding-left: 12rpx;">{{item.mobile}}</text>
+          </view>
+          <view style='color: #888;font-size:28rpx;'>
+            <text>{{item.province}}</text>
+            <text>{{item.city}}</text>
+            <text>{{item.area}}</text>
+          </view>
+        </view>
+        <view class="right">
+          <!-- <view wx:if="{{item.selected}}" class="icon_none" bindtap="bindCheckbox"
+          data-index="{{index}}">
+            <image src='/images/gou-red.png'></image>
+          </view>
+          <view wx:else bindtap="bindCheckbox" class='icon_none'
+          data-index="{{index}}">
+            <image src='/images/gou.png'></image>
+          </view> -->
+        </view>
+      </view>
+      <view class="delete-btn" data-index="{{index}}" catchtap="delItem">删除</view>
+    </view>
+    </view>
+  </view>
+
+  <block wx:if="{{loadError && !loading}}">
+    <template is="loadFail"></template>
+  </block>
+
+  <block wx:if="{{loading}}">
+    <template is="loading"></template>
+  </block>
+
+  <block wx:if="{{addrList.length==0 && !loadError && !loading}}">
+    <template is="emptyText"  
+      data="{{tip: '您还未添加过地址哦', top: '66px'}}"></template>
+  </block>
+
+  <view class="product" bindtap='onNewAddress'>
+    <image class="collect add" 
+    src='http://image.235shanghai.com/fashionMiniPrograms-add.png'></image>
+    <view>添加新地址</view>
+    <image class="collect" src='http://image.235shanghai.com/fashionMiniPrograms-go.png'></image>
+  </view>
+</view>

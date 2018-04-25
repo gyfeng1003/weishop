@@ -1,0 +1,23 @@
+@import "/pages/index/index.wxss"
+
+.list{
+  margin-bottom: 46px;
+}
+.tag1{
+  display: -webkit-flex;
+  justify-content: flex-end;
+}
+.del-btn{
+  border:1px solid #aaa;
+  border-radius:30rpx;
+  width:80rpx;
+  padding:10rpx 20rpx;
+  text-align:center;
+  height: 32rpx;
+  line-height: 32rpx;
+  margin-right: 16rpx;
+  color: #666;
+  padding-bottom:6rpx;
+  padding-top:4rpx;
+  font-size: 26rpx;
+}

@@ -1,0 +1,18 @@
+ .input{
+  padding: 20rpx;
+  background: #fdfdfd;
+  display: -webkit-flex;
+  font-size: 32rpx;
+}
+.input label{
+  flex: 0 0 25%;
+  color: #666;
+}
+.input input{
+  flex: 0 0 auto
+}
+.code-btn button{
+  font-size: 26rpx;
+  padding-left: 6px;
+  padding-right: 6px;
+}

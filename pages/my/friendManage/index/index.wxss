@@ -1,0 +1,2 @@
+@import '../../../../template/SearchBar/SearchBar.wxss';
+@import '../../../../template/recordList/recordList.wxss';

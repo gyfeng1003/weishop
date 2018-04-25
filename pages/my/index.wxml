@@ -1,0 +1,73 @@
+<import src="/template/Line/Line.wxml"/>
+
+<view class="container">
+  <view class="userinfo">
+    <image wx:if="{{userInfo && userInfo.avatar}}" class="userinfo-avatar" 
+    src="{{ userInfo.avatar}}" background-size="cover"></image>
+    <text class="userinfo-nickname">{{ userInfo.nickName }}</text>
+  </view>
+
+  <view bindtap='onFunctionMenu' data-key="order">
+    <view class="function-item">
+      <image class="function-item-icon" 
+      src='http://image.235shanghai.com/fashionMiniPrograms-dingdan.png'></image>
+      <view>我的订单</view>
+      <image class="collect" src='http://image.235shanghai.com/fashionMiniPrograms-go.png'></image>
+    </view>
+    <template is="lineView"></template>
+  </view>
+  
+  <view bindtap='onFunctionMenu' data-key="address">
+    <view class="function-item">
+      <image class="function-item-icon" 
+      src='http://image.235shanghai.com/fashionMiniPrograms-address.png'></image>
+      <view>收货地址</view>
+      <image class="collect" 
+      src='http://image.235shanghai.com/fashionMiniPrograms-go.png'></image>
+    </view>
+    <template is="lineView"></template>
+  </view>
+
+  <view bindtap='onFunctionMenu' wx:if="{{userInfo.roleType!=0}}" data-key="work">
+    <view class="function-item">
+      <image class="function-item-icon" 
+      src='http://image.235shanghai.com/fashionMiniPrograms-zuopin.png'></image>
+      <view>作品管理</view>
+      <image class="collect" 
+      src='http://image.235shanghai.com/fashionMiniPrograms-go.png'></image>
+    </view>
+    <template is="lineView"></template>
+  </view>
+  <block wx:if="{{userInfo.roleType == 1}}">
+    <view bindtap='onFunctionMenu' data-key="goods">
+      <view class="function-item">
+        <image class="function-item-icon" 
+        src='http://image.235shanghai.com/fashionMiniPrograms-shangpin.png'></image>
+        <view>商品管理</view>
+        <image class="collect" 
+        src='http://image.235shanghai.com/fashionMiniPrograms-go.png'></image>
+      </view>
+      <template is="lineView"></template>
+    </view>
+
+    <view bindtap='onFunctionMenu' data-key="person">  
+      <view class="function-item">
+        <image class="function-item-icon" 
+        src='http://image.235shanghai.com/fashionMiniPrograms-renyuan.png'></image>
+        <view>人员管理</view>
+        <image class="collect" 
+        src='http://image.235shanghai.com/fashionMiniPrograms-go.png'></image>
+      </view>
+      <template is="lineView"></template>
+    </view>
+  </block>
+  <view wx:if="{{!userInfo.mobile}}" class="function-item" 
+  style="border:none;width:auto;">
+    <button bindtap="getPhoneNumber">绑定手机号码</button>
+  </view>
+  <!-- <view wx:if="{{userInfo.mobile}}" class="function-item" 
+  style="border:none;padding-right:150rpx;width:auto;">
+    您当前绑定的手机号：{{userInfo.mobile}}
+  </view> -->
+  <view style="height:120rpx;background: #f4f8fb;width:100%;"></view>
+</view>

@@ -1,0 +1,54 @@
+<import src="/template/emptyText/emptyText.wxml"/>
+
+<view class="container">
+  <view class="product-list">
+    <block wx:for="{{goods}}" wx:for-item="item" 
+    wx:key="Math.random().toString(32)">
+      <view class="list-item"
+        style="height:{{(clientHeight)/4+2 +'px'}}"
+        data-goodsId="{{item.goodsId}}"
+        data-code="{{item.userCode}}"
+        bindtap='onToProductDetail'>
+        <view class="img">
+          <image
+          mode='aspectFill'
+        style="width:100%; height:{{clientHeight/4+'px'}};padding:20rpx;box-sizing:border-box;" 
+          src='{{item.picture}}'/>
+        </view>
+        <view class="item">
+          <view class="title">
+            {{item.name}}
+          </view>
+          <view class="detail">
+            <view>
+              {{item.goodsDesc}}
+            </view>
+            <view class="price">
+              <label><text style="font-size: 24rpx;">￥</text>
+              {{item.goodsCost}}</label>
+              <label><text style="font-size: 24rpx;">￥</text>
+              {{item.goodsPrice}}</label>
+            </view>
+            <!-- <view>
+              {{item.brand}}
+            </view> -->
+          </view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <block wx:if="{{loadError && !loading}}">
+    <template is="loadFail"></template>
+  </block>
+
+  <block wx:if="{{loading}}">
+    <template is="loading"></template>
+  </block>
+
+
+  <block wx:if="{{goods.length==0 && !loadError && !loading}}">
+    <template is="emptyText"  
+    data="{{tip: '暂无关联商品', top: '66px'}}"></template>
+  </block>
+</view>

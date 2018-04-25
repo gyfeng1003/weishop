@@ -1,0 +1,49 @@
+ <template name="productItem">
+  <view class="list-item" wx:if="{{(editWork && item.isDel==0) || !editWork}}">
+    <view class="img"><image src='{{item.picture}}'/></view>
+    <view class="item" data-id="{{item.goodsId}}" bindtap='onToProductDetail' 
+    style="flex: {{relate?'0 0 58%': '0 0 64%'}}">
+      <view class="title">
+        <text>{{item.name}}</text>
+      </view>
+      <view class="detail">
+        <view>
+          {{item.goodsDesc}}
+        </view>
+        <view class="price">
+          <label><text style="font-size: 24rpx;">￥</text>
+          {{item.goodsCost}}</label>
+          <label><text style="font-size: 24rpx;">￥</text>
+          {{item.goodsPrice}}</label>
+        </view>
+        <block wx:if="{{editProduct}}">
+          <view class="btn-group">
+            <view class="edit" data-type="edit" data-id="{{item.goodsId}}"
+             style='font-size: 26rpx;color: #666;'
+            catchtap='editOrDelGoods'>编辑</view>
+            <view class="del" data-type="del" data-goods="{{item}}"
+            catchtap='editOrDelGoods'>删除</view>
+          </view>
+        </block>
+
+        <block wx:if="{{editWork}}">
+          <view class="btn-group">
+            <view class="del" data-type="del" data-index="{{index}}"
+            catchtap='removeGoods'>移除</view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <!-- <block wx:if="{{relate || editProduct}}"> -->
+    <block wx:if="{{relate}}">
+      <view wx:if="{{item.selected}}" class="icon icon_none" catchtap="bindCheckbox"
+        data-index="{{index}}">
+        <image src='http://image.235shanghai.com/fashionMiniPrograms-gou-red.png'></image>
+      </view>
+      <view wx:else catchtap="bindCheckbox" class='icon icon_none'
+        data-index="{{index}}">
+        <image src='http://image.235shanghai.com/fashionMiniPrograms-gou.png'></image>
+      </view> 
+    </block>
+  </view>
+ </template>

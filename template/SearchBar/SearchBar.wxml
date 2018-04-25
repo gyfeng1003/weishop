@@ -1,0 +1,24 @@
+<template name="SearchBar">
+  <view class="search_bar" style="width:{{width}}">
+    <view class="search_box">
+      <image src="/images/search_icon.png"></image>
+      <input class="T1" bindinput="onSearchBarChangedEvent" 
+      bindblur='bindInput'
+      bindconfirm="onConfirm"
+      placeholder="{{placeholder}}" 
+      placeholder-class="input-color"
+      value="{{searchData.searchContent}}" />
+      <block wx:if="{{searchData.showClearBtn == true}}">
+        <image src="/images/icon_clear.png" mode="aspectFit"         bindtap="onSearchBarClearEvent"></image>
+      </block>
+    </view>
+  </view>
+  <view wx:if="{{isGoods}}" style='width: 10%;text-align:center;' 
+    bindtap='onAddGoods'>
+    <image class="add_icon" 
+    src='http://image.235shanghai.com/fashionMiniPrograms-addGood.png'></image>
+  </view>
+  <view wx:if="{{all}}" style='width: 12%;color:#666;text-align:center;' bindtap='onToAll'>
+    <text style="font-size: 32rpx;">全部</text>
+  </view>
+</template>

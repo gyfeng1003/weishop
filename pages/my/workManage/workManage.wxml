@@ -1,0 +1,56 @@
+<import src="/template/emptyText/emptyText.wxml"/>
+
+<view class="container">
+  <view class="content list">
+    <view class="left">
+      <block wx:for="{{works}}" wx:key="index">
+        <template is="item" data="{{...item, item}}" wx:if="{{index%2==0}}"></template>
+      </block>
+    </view>
+    <view class="right">
+      <block wx:for="{{works}}" wx:key="index">
+        <template is="item" data="{{...item, item}}" wx:if="{{index%2==1}}"></template>
+      </block>
+    </view>
+  </view>
+
+  <block wx:if="{{loadError && !loading}}">
+    <template is="loadFail"></template>
+  </block>
+
+  <block wx:if="{{loading}}">
+    <template is="loading"></template>
+  </block>
+
+  <block wx:if="{{works.length==0 && !loadError && !loading}}">
+    <template is="emptyText"
+      data="{{tip: '您还没有创建过作品哦，快去添加吧^_^'}}"></template>
+  </block>
+
+  <view class="product" bindtap='onAddOrEditWork'>
+    <button type="warn">添加</button>
+  </view>
+</view>
+
+<template name="item">
+  <view class="item" data-id="{{articleId}}"
+      bindtap='onWorkDetail'>
+    <image class="item-img" src="{{picture}}" mode="widthFix"></image>
+    <view class="item-title-box">
+      <view class="item-title label">{{title}}</view>
+    </view>
+    <view class="item-title-box">
+      <text class="item-title">{{content}}</text>
+    </view>
+    <view class="tag1" style='padding: 24rpx 0;'>
+      <view catchtap='editOrDel' data-type="edit" 
+        data-id="{{articleId}}" class="del-btn" >
+        编辑
+      </view>
+      <view catchtap='editOrDel' data-type="del" data-work="{{item}}" class="del-btn">
+        删除
+      </view>
+    </view>
+  </view>
+</template>
+

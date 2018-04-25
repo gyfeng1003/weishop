@@ -1,0 +1,39 @@
+<import src="/template/SearchBar/SearchBar.wxml"/>
+<import src="/template/productItem/productItem.wxml"/>
+<import src="/template/emptyText/emptyText.wxml"/>
+
+<view class="container">
+  <!--搜索框-->
+  <view class="search_view ui-search">
+    <template is="SearchBar" 
+    data="{{searchData,width:'82%',placeholder:'搜索商品', isGoods:true}}" />
+  </view>
+  <view class="search-fixed-top">
+    <view class="list-top">
+      <view class="label">商品管理</view>
+      <view class="edit-btn" hidden="{{!saveHidden}}" bindtap="editTap">管理</view>
+      <view class="edit-btn" hidden="{{saveHidden}}" bindtap="saveTap">完成</view>
+    </view>
+    <block wx:for="{{products}}" wx:key="index">
+      <template is="productItem" data="{{item,editProduct:!saveHidden,index}}"></template>
+    </block>
+  </view>
+
+  <block wx:if="{{loadError && !loading}}">
+    <template is="loadFail"></template>
+  </block>
+
+  <block wx:if="{{loading}}">
+    <template is="loading"></template>
+  </block>
+
+  <block wx:if="{{products.length==0 && !loadError && !loading}}">
+    <template is="emptyText"  
+    data="{{tip: '暂无商品', top: '66px'}}"></template>
+  </block>
+  <!-- <view class="submit-btn" hidden='{{saveHidden}}'>
+    <button bindtap="deleteSelected" 
+      class="{{noSelect?'no-select':''}}"  type='warn'>
+      删除</button>
+  </view> -->
+</view>

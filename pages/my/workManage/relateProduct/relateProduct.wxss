@@ -1,0 +1,15 @@
+@import '/template/productItem/productItem.wxss'
+@import '/template/SearchBar/SearchBar.wxss'
+
+.submit-btn{
+  display: -webkit-flex;
+  background: #fdfdfd;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+}
+.submit-btn button{
+  width: 100%;
+  border-radius: 0;
+}

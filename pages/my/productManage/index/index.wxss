@@ -1,0 +1,28 @@
+/* pages/my/productManage/index/index.wxss */
+@import '/pages/my/workManage/addOrEditWork/addOrEditWork.wxss';
+@import '../../../../template/SearchBar/SearchBar.wxss';
+@import '../../../../template/productItem/productItem.wxss';
+.container{
+  padding-bottom: 46px;
+}
+.search_view {
+  width: 100%;
+  height: 110rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position:fixed;
+  z-index:999;
+  background-color: #f9f9f9;
+}
+.ui-search {
+  border-top: 1px solid #000;
+}
+.search-fixed-top {
+  padding-top:110rpx;
+  width:100%;
+}
+
+.submit-btn .no-select{
+  background-color: #ccc;
+}

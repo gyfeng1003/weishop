@@ -1,0 +1,30 @@
+<import src="/template/SearchBar/SearchBar.wxml"/>
+<import src="/template/recordList/recordList.wxml"/>
+<import src="/template/emptyText/emptyText.wxml"/>
+
+<view class="container">
+  <!--搜索框-->
+  <view class="search_view ui-search">
+    <template is="SearchBar" 
+    data="{{searchData,width:'92%',placeholder:'昵称、手机号'}}" />
+  </view>
+  <view class="search-fixed-top">
+    <block wx:for="{{notEmployList}}" wx:key="index" 
+    wx:if="{{notEmployList.length>0 && !loadError && !loading}}">
+      <template is="recordList" data="{{friend:item, page:'setting'}}"></template>
+    </block>
+
+    <block wx:if="{{notEmployList.length == 0 && !searchFlag && !loadError && !loading}}">
+      <template is="listEmpty" data="{{text:'没有搜索到相关好友'}}">
+      </template>
+    </block>
+
+    <block wx:if="{{loadError && !loading}}">
+      <template is="loadFail"></template>
+    </block>
+
+    <block wx:if="{{loading}}">
+      <template is="loading"></template>
+    </block>
+  </view>
+</view>

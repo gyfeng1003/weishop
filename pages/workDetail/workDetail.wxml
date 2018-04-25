@@ -1,0 +1,94 @@
+<import src="/template/Line/Line"/>
+<import src="/wxParse/wxParse.wxml"/>
+
+<view class="container">
+  <view style='margin-bottom: 86px;'>
+     <view class="swiper-container"> 
+        <swiper class="swiper_box" 
+            autoplay="{{autoplay}}"
+            style='height:{{imgheights[current].height}}px'
+            bindchange="swiperchange">
+          <block wx:for="{{work.imgList}}" wx:key="{{index}}">
+            <swiper-item>
+              <image src="{{item.imageUrl}}" 
+              data-index="{{index}}"
+            style="width:{{imgheights[current].width}}px;height:{{imgheights[current].height}}px" 
+            mode="widthFix" lazy-load='true' bindload='autoImage'/>
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class="dots">  
+          <block wx:for="{{work.imgList}}" wx:key="index">  
+              <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>  
+          </block>
+        </view>
+     </view> 
+    <view class="panel">
+      <view class="box">
+        <view style='font-size: 34rpx;font-weight:600;'>{{work.title}}</view>
+        <view class="share" wx:if="{{work.userCode == currentUser.userCode}}">
+          <image class="collect" src="/images/share.png"/>
+          <view style="font-size: 22rpx;color: #666;">分享</view>
+          <button open-type="share">分享</button>
+        </view>
+      </view>
+      <view>
+        <template is="wxParse" data="{{wxParseData:content.nodes}}"/>
+      </view>
+    </view>
+    <view class="panel">
+      <view class="jw">
+        <view>笔记评论</view>
+        <view>
+        </view>
+      </view>
+      <template is="lineView"></template>
+      <view class="discuss">
+        <image class="avator" src="{{currentUser.avatar}}"/>
+        <block wx:if="{{!toggleInput}}">
+          <view bindtap="onToggleInput" style="padding: 10rpx 0;">
+            <label style="padding-left: 10rpx;">想勾搭，先评论</label>
+          </view>
+        </block>
+        <block wx:else>
+          <view>
+            <input class="publish-input" bindblur='bindInput' placeholder="请输入评论~"/>
+            <button class="publish-btn" bindtap='onPublish'>发表</button>
+          </view>
+        </block>
+      </view>
+      <view class="discuss-list">
+        <block wx:for="{{ciList}}" wx:for-item="item" 
+        wx:key="Math.random().toString(32)">
+          <view class="list-item">
+            <image class="avator" src="{{item.avatar}}"/>
+            <view>
+              <view class="name">{{item.nickName}}</view>
+              <view>{{item.content}}</view>
+              <view class="discuss-item">
+                <view>{{item.timeStamp}}</view>
+                <view class="reply">
+                  <!-- <view>回复</view> -->
+                  <!-- <image class="collect" src="/images/like.png"/>
+                  <view>{{item.likeNum}}</view> -->
+                </view>
+              </view>
+            </view>  
+          </view>
+          <template is="lineView"/>
+        </block>
+      </view>
+    
+      <!-- <view style='margin-top: 10rpx;'>
+        <button>查看全部评论</button>
+      </view> -->
+    </view>
+  </view>
+  <view class="home" catchtap='toHome'>
+    <!-- <image src='/images/nav/home-off.png'></image> -->
+    <view>首页</view>
+  </view>
+  <view class="product" bindtap='onToProductList' data-articleId = "{{work.articleId}}">
+    <button type="warn">商品</button>
+  </view>
+</view>
